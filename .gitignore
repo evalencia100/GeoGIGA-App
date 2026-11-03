@@ -12,3 +12,5 @@ data/working/
 .Rproj.user/
 .DS_Store
 node_modules/
+.venv/
+__pycache__/

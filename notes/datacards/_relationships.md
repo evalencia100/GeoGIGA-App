@@ -32,7 +32,8 @@ Development finance (topic 02) has a separate lineage. OECD CRS is donor-reporte
 | ISO3 | `reference/country-codes.md` → atlas country table | Everything else (CRS, AidData, V-Dem, World Bank, geometries) | The bridge between trade data and all other data. Not unique inside BACI (BEL, DEU, SDN). |
 | HS 6-digit | `reference/hs-products.md` | BACI, Comtrade, Kiel | Codes are tied to a revision, and the same code can differ between revisions |
 | HS national 8–10 digit | — | Comtrade only (tariff-line data) | BACI does not go below 6 digits |
-| Region / grouping | `regions/regions.yaml`, North–South list (pending) | All topic pages | Defined once, used by every source |
+| Region / grouping | `regions/regions.yaml`; North–South = `global_south` column in `reference/countries.csv` | All topic pages | Defined once, used by every source |
+| Map geometry | `reference/geo/world_countries.geojson`, `reference/geo/world_grid.json` | All map charts | Joined on ISO3/ISO2, never on numeric codes. No Taiwan or Hong Kong yet. |
 
 **Rule:** a country grouping is defined **once**, by ISO3, in the atlas's own files. Scripts never type lists of country names or call `countrycode()` to get trade codes. That is how France and the USA silently drop out of groupings (see BACI card §3.2).
 
@@ -53,7 +54,7 @@ Development finance (topic 02) has a separate lineage. OECD CRS is donor-reporte
 
 | Source | Access | Key needed | Where the call happens |
 |---|---|---|---|
-| BACI | Bulk zip, manual | No | R loader at build time |
+| BACI | Bulk zip, scripted (`loaders/baci_download.py`) | No | Python loader, once per release |
 | UN Comtrade | API | Yes (free key: 500 calls/day, 100k records/call) | **To decide.** See below. |
 | V-Dem, OECD, World Bank | API / download | Mostly no | Currently called inside Eduardo's observablehq.com notebooks |
 
@@ -77,7 +78,7 @@ Whether Comtrade's API accepts calls made from a browser (CORS) is **not yet ver
 
 | Card | Source | Kind | Status |
 |---|---|---|---|
-| `baci-cepii.md` | BACI, CEPII | aggregate | draft v0.2 |
+| `baci-cepii.md` | BACI, CEPII | aggregate | v1.0 |
 | `un-comtrade.md` | UN Comtrade | primary (compiled official declarations) | to write |
 | `oecd-crs.md` | OECD CRS | primary | to write |
 | `aiddata-gcdf.md` | AidData GCDF | primary | to write |

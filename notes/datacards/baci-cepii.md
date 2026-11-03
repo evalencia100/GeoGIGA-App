@@ -1,10 +1,10 @@
 # Data card: BACI (CEPII)
 
-> **Status:** draft v0.3 · edited 2026-11-03 · describes release **V202601** (22 Jan 2026), revisions **HS92** and **HS22**
+> **Status:** **v1.0, concluded** 2026-11-03 · describes release **V202601** (22 Jan 2026), revisions **HS92** and **HS22**. From here on it improves through use: add to §11 whenever a chart teaches us something.
 > **Purpose:** a self-contained reference, so nobody has to reopen the CEPII pages or the zip readme. It describes the dataset *in general*, not any one chart.
 > **Atlas status:** not promoted. Promotion to `registry/sources.yaml` is Eduardo's call.
 > **Related files:** `reference/country-codes.md` (all 238 codes) · `reference/hs-products.md` (HS structure, HS92 compared with HS22, concordance) · `source-update-calendar.md` · `_relationships.md` (BACI ↔ Comtrade and other sources)
-> **In the repository:** `loaders/baci.R` (raw CSV → Parquet) · `templates/baci_question.Rmd` (one question → one table) · `reference/` (full code lists and concordances)
+> **In the repository:** `loaders/baci_download.py` (download + unzip) · `loaders/baci_load.py` (CSV → Parquet) · `templates/baci_question.py` (one question → one table) · `reference/countries.csv` (the country table) · `reference/hs/` (code lists, concordances) · `reference/geo/` (world map, grid map)
 
 ---
 
@@ -28,7 +28,7 @@
 | Latest year | **Provisional**, and can be revised substantially, which earns the atlas asterisk |
 | Free? | **Yes.** No registration and no fee. |
 | Licence | Etalab Open Licence 2.0. Any use is allowed if "BACI, CEPII" is credited, ideally with a link. |
-| Public API? | **No.** Bulk zip per HS revision only. Needs a loader script. |
+| Public API? | **No.** Bulk zip per HS revision, at a predictable address (`https://www.cepii.fr/DATA_DOWNLOAD/baci/data/BACI_HS{rev}_V{version}.zip`), so download is scripted: `python loaders/baci_download.py --load`. |
 | Geocoded? | **No.** Country level only (§6). |
 | Format | CSV (comma, dot decimal), one file per year, plus country and product metadata CSVs and a readme |
 | Size | On the order of 10 million rows per year file and several GB per revision. **Too big for Excel.** |
@@ -50,7 +50,7 @@ These were found by checking the actual files. **The CEPII documentation does no
 |---|---|---|---|
 | 1 | **Namibia's ISO2 is `NA`** | R reads it as missing, so Namibia drops out of joins | Read the metadata with `na = character()` |
 | 2 | **ISO3 is not unique** (BEL, DEU, SDN appear twice) | A join on ISO3 duplicates rows | Join on `country_code` first |
-| 3 | **Codes ≠ ISO numeric**: France 251, Norway 579, India 699, Switzerland 757, USA 842 | `countrycode(…, "iso3n")` returns 250 or 840, which match **nothing**, so France and the USA silently vanish from groupings | Never derive trade codes with `countrycode()`. Use `reference/country-codes.md`. |
+| 3 | **Codes ≠ ISO numeric**: France 251, Norway 579, India 699, Switzerland 757, USA 842 | `countrycode(…, "iso3n")` returns 250 or 840, which match **nothing**, so France and the USA silently vanish from groupings | Never derive trade codes from ISO numeric. Group by `atlas_iso3` in `reference/countries.csv`. |
 | 4 | **Sudan changes code**: 736 (to 2011, incl. South Sudan) → 729 + 728 | Filtering on 729 loses Sudan before 2012 | Filter on both codes, or on ISO3 |
 | 5 | **Taiwan only exists as 490** ("Other Asia, nes", ISO3 `S19`) | Semiconductor charts miss or mislabel Taiwan | Recode explicitly (e.g. to TWN), and label it honestly |
 | 6 | **Accented names are garbled** (double-encoded UTF-8: "CÃ´te d'Ivoire") | Ugly or wrong labels | Never display BACI names. Use the atlas country table. |
@@ -127,7 +127,8 @@ These are **characteristics, not errors**. Name them in a chart note when they m
 |---|---|
 | Geocoded? | **No.** The smallest unit is the country (customs territory). |
 | Coordinates | None. Flow maps need centroids from elsewhere (e.g. Natural Earth). |
-| Join to geometry | `country_code` → ISO3 → geometry. Watch pitfalls 2–5. |
+| Join to geometry | `country_code` → `atlas_iso3` (via `reference/countries.csv`) → map. Watch pitfalls 2–5. |
+| Maps in the repo | `reference/geo/world_countries.geojson` (Natural Earth country shapes, 195 features, plus 28 small states as points) and `reference/geo/world_grid.json` (one tile per country, 197 tiles, small states included). `countries.csv` says which BACI entities each map can draw. **Neither has Taiwan or Hong Kong.** |
 | Entities without geometry | 490 (map it to Taiwan, with labelling), 697, 711, "nes" residuals, historical entities |
 | Suitable | Choropleths (exports, imports, shares), country-to-country flow maps, small multiples by year |
 | Not suitable | Point maps, ports, routes or chokepoints, sub-national maps |
@@ -149,20 +150,22 @@ These are **characteristics, not errors**. Name them in a chart note when they m
 
 ---
 
-## 8. Wrangling: two steps
+## 8. Wrangling: three scripts, in Python
 
-The data are too big to wrangle from scratch for every question, so the work is split in two:
+| Step | When | Command | What it does |
+|---|---|---|---|
+| Download | Once per release (late January) | `python loaders/baci_download.py` | Finds the newest version on the CEPII page, downloads the HS92 and HS22 zips into `data/raw/baci/<today>/`, unzips them, writes `manifest.json` (URLs, checksums, date) |
+| Load | Right after download (or add `--load` to the line above) | `python loaders/baci_load.py data/raw/baci/<date>` | Reads every year file as text, converts types on purpose, checks (year in file = year in name, 6-character codes, readable values), writes Parquet to `data/baci/hs_rev=92/t=2024/`. Stops if the release has a country code missing from `reference/countries.csv`. |
+| Question | Every chart | copy `templates/baci_question.py`, change 4 blocks, run it | Groups countries by ISO3 (or by the Global South column), filters revision, years and products, sums to US$ bn, saves one CSV named after the chart id |
 
-1. **Once per release: `loaders/baci.R`.** It reads every year file in `data/raw/baci/<snapshot>/` and writes Parquet to `data/baci/hs_rev=92/t=2024/…`. It takes year, revision and version from the **file names**, reads `k` as text, refuses to mix versions, and writes a cleaned country table (`data/baci_meta/countries.parquet`) with `atlas_iso3`, where 490 becomes TWN. Run it with `Rscript loaders/baci.R 2026-01-22`.
-2. **Once per question: copy `templates/baci_question.Rmd`.** Three blocks to change (HS revision and years; product codes; country groups by ISO3). It opens all years lazily with `arrow::open_dataset()`, filters before loading anything, and saves one small CSV named after the chart id.
+Rules built into the scripts (each one is a bug from the old Rmd):
+- Year, revision and version come from **file names**, never from the order of a list.
+- `k` stays text; padded `NA` in `q` becomes missing; mixing versions is refused.
+- Groups are defined by `atlas_iso3`, never by numeric code, so France, the USA and pre-2012 Sudan are always included.
+- Tonnes are only summed for a single product.
+- A BACI code that is not in the country table makes the question script stop instead of silently dropping trade.
 
-Rules the template enforces (each one is a bug that happened in the old script):
-- Groups are defined by ISO3 through the cleaned country table, **never** with `countrycode(…, "iso3n")`.
-- Sudan before 2012 comes along automatically, because its old code also maps to SDN.
-- `v` is divided by 1e6 to get US$ billions, in one place.
-- `q` is only summed when the product list is a single product.
-
-Packages: `readr`, `dplyr`, `stringr`, `arrow`. Neither file has been run yet. R could not be installed in the environment where they were written, so the first run on Eduardo's machine is the test.
+All three scripts were tested on synthetic files that copy BACI's format (including padded `NA` and leading zeros). The first real download is the remaining test. Packages: `duckdb`, `pandas` (`requirements.txt`).
 
 ---
 
@@ -171,18 +174,25 @@ Packages: `readr`, `dplyr`, `stringr`, `arrow`. Neither file has been run yet. R
 ### `global_south_north_trade.csv`
 - Made by `ceprii_wrangling_GS_GN_trade.Rmd` (Eduardo, local script) from **BACI V202601, HS92**.
 - Columns `year, i, j, q, v`. `i` and `j` are aggregated to Global North / Global South, giving 4 rows per year, **2000–2023**.
-- **Definition of South:** `global_south_classification_UN.csv` (UN Trade and Development / UNCTAD), joined on `country_code` = `code`. **The file is not yet in the project. It is needed here, and the join key must be checked** (if it uses ISO/M49 codes, France, the USA, India, Norway and Switzerland do not match; see pitfall 3).
-- Taiwan (490) was recoded to TWN in that script.
+- **Definition of South:** `reference/groupings/global_south_UN.csv` (UNCTAD-based, compiled by Eduardo; vintage not recorded), now the `global_south` column of `reference/countries.csv`. It uses **BACI codes** (251, 842…), so the join in the old script was correct.
+- **Caveat:** the list marks 490 "Chinese Taipei" as North but 158 "Taiwan Province of China" as South. BACI only uses 490, so Taiwan counted as **North** in this table. 58, 697 and 711 are not in the list.
 - 2024 is not included. In the script as it stands, 25 files are named with 24 years (`2000:2023`), so the 2024 file would get the year `NA`. The CSV was probably produced before 2024 was added to the file list.
 - Units: `v` in thousands of USD (2023 world total ≈ US$ 22.6 trillion); `q` in tonnes summed over all products.
 - At a glance: South→South value grew from US$ 0.58 trillion (2000) to US$ 4.9 trillion (2023), now about equal to South→North; South→South tonnage is now the largest of the four flows.
 
 ---
 
-## 10. Open questions
+## 10. Decisions still open (they do not block use)
 
-- [ ] Confirm the zero-versus-gap rule (§7 point 4).
-- [ ] Upload the UNCTAD Global South classification → `reference/` + add it to `regions.yaml`?
-- [x] HS concordances: UNSD tables for all editions are in `reference/hs/concordance/`.
-- [ ] Topic product baskets (which HS codes count as "cobalt", "chips"…): a research decision, stored once in `reference/hs/baskets/`.
-- [ ] Which intermediate revisions, if any (HS07 for chip equipment from 2007, HS17 for EVs from 2017)?
+- [ ] Zero-versus-gap rule (§7 point 4): proposed, not yet confirmed.
+- [ ] Taiwan in the North/South split: North (as the list says for 490) or South (as UNCTAD says for 158)?
+- [ ] Topic product baskets (`reference/hs/baskets/`): written per topic, when that topic is built.
+- [ ] Add Taiwan and Hong Kong to the maps.
+
+---
+
+## 11. Learned through use
+
+*Add a dated line whenever a chart or question teaches something about BACI that belongs here.*
+
+- 2026-11-03: the old North/South Rmd showed three silent failures (ISO-numeric groupings, list-position years, a missing Sudan code). All three are now prevented by the scripts in §8.
