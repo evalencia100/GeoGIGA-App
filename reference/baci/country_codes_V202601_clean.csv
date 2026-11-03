@@ -1,0 +1,239 @@
+country_code,country_name,country_iso2,country_iso3,iso_numeric,atlas_iso3,status
+4,Afghanistan,AF,AFG,4,AFG,current
+8,Albania,AL,ALB,8,ALB,current
+12,Algeria,DZ,DZA,12,DZA,current
+16,American Samoa,AS,ASM,16,ASM,current
+20,Andorra,AD,AND,20,AND,current
+24,Angola,AO,AGO,24,AGO,current
+28,Antigua and Barbuda,AG,ATG,28,ATG,current
+31,Azerbaijan,AZ,AZE,31,AZE,current
+32,Argentina,AR,ARG,32,ARG,current
+36,Australia,AU,AUS,36,AUS,current
+40,Austria,AT,AUT,40,AUT,current
+44,Bahamas,BS,BHS,44,BHS,current
+48,Bahrain,BH,BHR,48,BHR,current
+50,Bangladesh,BD,BGD,50,BGD,current
+51,Armenia,AM,ARM,51,ARM,current
+52,Barbados,BB,BRB,52,BRB,current
+56,Belgium,BE,BEL,56,BEL,current
+58,Belgium-Luxembourg (...1998),BE,BEL,58,BEL,historical
+60,Bermuda,BM,BMU,60,BMU,current
+64,Bhutan,BT,BTN,64,BTN,current
+68,Bolivia (Plurinational State of),BO,BOL,68,BOL,current
+70,Bosnia Herzegovina,BA,BIH,70,BIH,current
+72,Botswana,BW,BWA,72,BWA,current
+76,Brazil,BR,BRA,76,BRA,current
+84,Belize,BZ,BLZ,84,BLZ,current
+86,Br. Indian Ocean Terr.,IO,IOT,86,IOT,current
+90,Solomon Isds,SB,SLB,90,SLB,current
+92,Br. Virgin Isds,VG,VGB,92,VGB,current
+96,Brunei Darussalam,BN,BRN,96,BRN,current
+100,Bulgaria,BG,BGR,100,BGR,current
+104,Myanmar,MM,MMR,104,MMR,current
+108,Burundi,BI,BDI,108,BDI,current
+112,Belarus,BY,BLR,112,BLR,current
+116,Cambodia,KH,KHM,116,KHM,current
+120,Cameroon,CM,CMR,120,CMR,current
+124,Canada,CA,CAN,124,CAN,current
+132,Cabo Verde,CV,CPV,132,CPV,current
+136,Cayman Isds,KY,CYM,136,CYM,current
+140,Central African Rep.,CF,CAF,140,CAF,current
+144,Sri Lanka,LK,LKA,144,LKA,current
+148,Chad,TD,TCD,148,TCD,current
+152,Chile,CL,CHL,152,CHL,current
+156,China,CN,CHN,156,CHN,current
+162,Christmas Isds,CX,CXR,162,CXR,current
+166,Cocos Isds,CC,CCK,166,CCK,current
+170,Colombia,CO,COL,170,COL,current
+174,Comoros,KM,COM,174,COM,current
+175,Mayotte (Overseas France),YT,MYT,175,MYT,current
+178,Congo,CG,COG,178,COG,current
+180,Dem. Rep. of the Congo,CD,COD,180,COD,current
+184,Cook Isds,CK,COK,184,COK,current
+188,Costa Rica,CR,CRI,188,CRI,current
+191,Croatia,HR,HRV,191,HRV,current
+192,Cuba,CU,CUB,192,CUB,current
+196,Cyprus,CY,CYP,196,CYP,current
+200,Czechoslovakia (...1992),CS,CSK,200,CSK,historical
+203,Czechia,CZ,CZE,203,CZE,current
+204,Benin,BJ,BEN,204,BEN,current
+208,Denmark,DK,DNK,208,DNK,current
+212,Dominica,DM,DMA,212,DMA,current
+214,Dominican Rep.,DO,DOM,214,DOM,current
+218,Ecuador,EC,ECU,218,ECU,current
+222,El Salvador,SV,SLV,222,SLV,current
+226,Equatorial Guinea,GQ,GNQ,226,GNQ,current
+231,Ethiopia,ET,ETH,231,ETH,current
+232,Eritrea,ER,ERI,232,ERI,current
+233,Estonia,EE,EST,233,EST,current
+238,Falkland Isds (Malvinas),FK,FLK,238,FLK,current
+242,Fiji,FJ,FJI,242,FJI,current
+246,Finland,FI,FIN,246,FIN,current
+251,France,FR,FRA,250,FRA,current
+258,French Polynesia,PF,PYF,258,PYF,current
+260,Fr. South Antarctic Terr.,TF,ATF,260,ATF,current
+262,Djibouti,DJ,DJI,262,DJI,current
+266,Gabon,GA,GAB,266,GAB,current
+268,Georgia,GE,GEO,268,GEO,current
+270,Gambia,GM,GMB,270,GMB,current
+275,State of Palestine,PS,PSE,275,PSE,current
+276,Germany,DE,DEU,276,DEU,current
+278,Dem. Rep. of Germany (...1990),DD,DDR,278,DDR,historical
+280,Fed. Rep. of Germany (...1990),DE,DEU,280,DEU,historical
+288,Ghana,GH,GHA,288,GHA,current
+292,Gibraltar,GI,GIB,292,GIB,current
+296,Kiribati,KI,KIR,296,KIR,current
+300,Greece,GR,GRC,300,GRC,current
+304,Greenland,GL,GRL,304,GRL,current
+308,Grenada,GD,GRD,308,GRD,current
+316,Guam,GU,GUM,316,GUM,current
+320,Guatemala,GT,GTM,320,GTM,current
+324,Guinea,GN,GIN,324,GIN,current
+328,Guyana,GY,GUY,328,GUY,current
+332,Haiti,HT,HTI,332,HTI,current
+340,Honduras,HN,HND,340,HND,current
+344,"China, Hong Kong SAR",HK,HKG,344,HKG,current
+348,Hungary,HU,HUN,348,HUN,current
+352,Iceland,IS,ISL,352,ISL,current
+360,Indonesia,ID,IDN,360,IDN,current
+364,Iran,IR,IRN,364,IRN,current
+368,Iraq,IQ,IRQ,368,IRQ,current
+372,Ireland,IE,IRL,372,IRL,current
+376,Israel,IL,ISR,376,ISR,current
+380,Italy,IT,ITA,380,ITA,current
+384,Côte d'Ivoire,CI,CIV,384,CIV,current
+388,Jamaica,JM,JAM,388,JAM,current
+392,Japan,JP,JPN,392,JPN,current
+398,Kazakhstan,KZ,KAZ,398,KAZ,current
+400,Jordan,JO,JOR,400,JOR,current
+404,Kenya,KE,KEN,404,KEN,current
+408,Dem. People's Rep. of Korea,KP,PRK,408,PRK,current
+410,Rep. of Korea,KR,KOR,410,KOR,current
+414,Kuwait,KW,KWT,414,KWT,current
+417,Kyrgyzstan,KG,KGZ,417,KGZ,current
+418,Lao People's Dem. Rep.,LA,LAO,418,LAO,current
+422,Lebanon,LB,LBN,422,LBN,current
+426,Lesotho,LS,LSO,426,LSO,current
+428,Latvia,LV,LVA,428,LVA,current
+430,Liberia,LR,LBR,430,LBR,current
+434,Libya,LY,LBY,434,LBY,current
+440,Lithuania,LT,LTU,440,LTU,current
+442,Luxembourg,LU,LUX,442,LUX,current
+446,"China, Macao SAR",MO,MAC,446,MAC,current
+450,Madagascar,MG,MDG,450,MDG,current
+454,Malawi,MW,MWI,454,MWI,current
+458,Malaysia,MY,MYS,458,MYS,current
+462,Maldives,MV,MDV,462,MDV,current
+466,Mali,ML,MLI,466,MLI,current
+470,Malta,MT,MLT,470,MLT,current
+478,Mauritania,MR,MRT,478,MRT,current
+480,Mauritius,MU,MUS,480,MUS,current
+484,Mexico,MX,MEX,484,MEX,current
+490,"Other Asia, nes",,S19,158,TWN,nes
+496,Mongolia,MN,MNG,496,MNG,current
+498,Rep. of Moldova,MD,MDA,498,MDA,current
+499,Montenegro,ME,MNE,499,MNE,current
+500,Montserrat,MS,MSR,500,MSR,current
+504,Morocco,MA,MAR,504,MAR,current
+508,Mozambique,MZ,MOZ,508,MOZ,current
+512,Oman,OM,OMN,512,OMN,current
+516,Namibia,NA,NAM,516,NAM,current
+520,Nauru,NR,NRU,520,NRU,current
+524,Nepal,NP,NPL,524,NPL,current
+528,Netherlands,NL,NLD,528,NLD,current
+530,Netherlands Antilles (...2010),AN,ANT,530,ANT,historical
+531,Curaçao,CW,CUW,531,CUW,current
+533,Aruba,AW,ABW,533,ABW,current
+534,Saint Maarten,SX,SXM,534,SXM,current
+535,Bonaire,BQ,BES,535,BES,current
+540,New Caledonia,NC,NCL,540,NCL,current
+548,Vanuatu,VU,VUT,548,VUT,current
+554,New Zealand,NZ,NZL,554,NZL,current
+558,Nicaragua,NI,NIC,558,NIC,current
+562,Niger,NE,NER,562,NER,current
+566,Nigeria,NG,NGA,566,NGA,current
+570,Niue,NU,NIU,570,NIU,current
+574,Norfolk Isds,NF,NFK,574,NFK,current
+579,Norway,NO,NOR,578,NOR,current
+580,N. Mariana Isds,MP,MNP,580,MNP,current
+583,FS Micronesia,FM,FSM,583,FSM,current
+584,Marshall Isds,MH,MHL,584,MHL,current
+585,Palau,PW,PLW,585,PLW,current
+586,Pakistan,PK,PAK,586,PAK,current
+591,Panama,PA,PAN,591,PAN,current
+598,Papua New Guinea,PG,PNG,598,PNG,current
+600,Paraguay,PY,PRY,600,PRY,current
+604,Peru,PE,PER,604,PER,current
+608,Philippines,PH,PHL,608,PHL,current
+612,Pitcairn,PN,PCN,612,PCN,current
+616,Poland,PL,POL,616,POL,current
+620,Portugal,PT,PRT,620,PRT,current
+624,Guinea-Bissau,GW,GNB,624,GNB,current
+626,Timor-Leste,TL,TLS,626,TLS,current
+634,Qatar,QA,QAT,634,QAT,current
+642,Romania,RO,ROU,642,ROU,current
+643,Russian Federation,RU,RUS,643,RUS,current
+646,Rwanda,RW,RWA,646,RWA,current
+652,Saint Barthélemy,BL,BLM,652,BLM,current
+654,Saint Helena,SH,SHN,654,SHN,current
+659,Saint Kitts and Nevis,KN,KNA,659,KNA,current
+660,Anguilla,AI,AIA,660,AIA,current
+662,Saint Lucia,LC,LCA,662,LCA,current
+666,Saint Pierre and Miquelon,PM,SPM,666,SPM,current
+670,Saint Vincent and the Grenadines,VC,VCT,670,VCT,current
+674,San Marino,SM,SMR,674,SMR,current
+678,Sao Tome and Principe,ST,STP,678,STP,current
+682,Saudi Arabia,SA,SAU,682,SAU,current
+686,Senegal,SN,SEN,686,SEN,current
+688,Serbia,RS,SRB,688,SRB,current
+690,Seychelles,SC,SYC,690,SYC,current
+694,Sierra Leone,SL,SLE,694,SLE,current
+697,"Europe EFTA, nes",,R20,697,,nes
+699,India,IN,IND,356,IND,current
+702,Singapore,SG,SGP,702,SGP,current
+703,Slovakia,SK,SVK,703,SVK,current
+704,Viet Nam,VN,VNM,704,VNM,current
+705,Slovenia,SI,SVN,705,SVN,current
+706,Somalia,SO,SOM,706,SOM,current
+710,South Africa,ZA,ZAF,710,ZAF,current
+711,Southern African Customs Union (...1999),,ZA1,711,,historical
+716,Zimbabwe,ZW,ZWE,716,ZWE,current
+724,Spain,ES,ESP,724,ESP,current
+728,South Sudan,SS,SSD,728,SSD,current
+729,Sudan,SD,SDN,729,SDN,current
+736,Sudan (...2011),SD,SDN,736,SDN,historical
+740,Suriname,SR,SUR,740,SUR,current
+748,Eswatini,SZ,SWZ,748,SWZ,current
+752,Sweden,SE,SWE,752,SWE,current
+757,Switzerland,CH,CHE,756,CHE,current
+760,Syria,SY,SYR,760,SYR,current
+762,Tajikistan,TJ,TJK,762,TJK,current
+764,Thailand,TH,THA,764,THA,current
+768,Togo,TG,TGO,768,TGO,current
+772,Tokelau,TK,TKL,772,TKL,current
+776,Tonga,TO,TON,776,TON,current
+780,Trinidad and Tobago,TT,TTO,780,TTO,current
+784,United Arab Emirates,AE,ARE,784,ARE,current
+788,Tunisia,TN,TUN,788,TUN,current
+792,Türkiye,TR,TUR,792,TUR,current
+795,Turkmenistan,TM,TKM,795,TKM,current
+796,Turks and Caicos Isds,TC,TCA,796,TCA,current
+798,Tuvalu,TV,TUV,798,TUV,current
+800,Uganda,UG,UGA,800,UGA,current
+804,Ukraine,UA,UKR,804,UKR,current
+807,North Macedonia,MK,MKD,807,MKD,current
+810,USSR (...1990),SU,SUN,810,SUN,historical
+818,Egypt,EG,EGY,818,EGY,current
+826,United Kingdom,GB,GBR,826,GBR,current
+834,United Rep. of Tanzania,TZ,TZA,834,TZA,current
+842,USA,US,USA,840,USA,current
+849,US Misc. Pacific Isds,PU,PUS,581,PUS,current
+854,Burkina Faso,BF,BFA,854,BFA,current
+858,Uruguay,UY,URY,858,URY,current
+860,Uzbekistan,UZ,UZB,860,UZB,current
+862,Venezuela,VE,VEN,862,VEN,current
+876,Wallis and Futuna Isds,WF,WLF,876,WLF,current
+882,Samoa,WS,WSM,882,WSM,current
+887,Yemen,YE,YEM,887,YEM,current
+891,Serbia and Montenegro (...2005),CS,SCG,891,SCG,historical
+894,Zambia,ZM,ZMB,894,ZMB,current

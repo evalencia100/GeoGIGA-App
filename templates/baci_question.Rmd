@@ -1,0 +1,84 @@
+---
+title: "BACI question: <write the question here>"
+author: "Eduardo Valencia"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+<!--
+Template for answering one question with BACI.
+Copy this file, rename it, and change only the three marked blocks.
+It assumes the loader has run once (Rscript loaders/baci.R <snapshot>), so the
+data are already Parquet. Nothing here reads the raw CSVs.
+-->
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = "..")  # paths below are relative to the repository root
+library(arrow)
+library(dplyr)
+library(readr)
+```
+
+```{r data}
+# A "lazy" handle on all BACI years: nothing is loaded into memory yet.
+# dplyr verbs are translated and only run when you call collect().
+baci      <- open_dataset("data/baci")
+countries <- read_parquet("data/baci_meta/countries.parquet")
+```
+
+```{r choices}
+# ── CHANGE 1: HS revision and years ─────────────────────────────────────────
+hs    <- 92            # 92 for long series (1995-), 22 for modern products (2022-)
+years <- 2000:2024
+
+# ── CHANGE 2: products (HS6 codes, as text) ─────────────────────────────────
+# Leave NULL for all products. Look codes up in reference/hs/ rather than guessing.
+products <- NULL       # e.g. c("260500", "810520") for cobalt ore and mattes (HS22)
+
+# ── CHANGE 3: country groups, by atlas_iso3 ─────────────────────────────────
+# Define groups with ISO3, never with countrycode(..., "iso3n"): BACI's
+# numeric codes differ for France, USA, India, Norway and Switzerland.
+groups <- tribble(
+  ~atlas_iso3, ~group,
+  "CHN", "China",
+  "USA", "United States",
+  "DEU", "European Union", "FRA", "European Union", "ITA", "European Union"
+  # ... everyone not listed becomes "Others"
+)
+
+# Code -> group lookup. Sudan's pre-2012 code (736) is included automatically,
+# because the join is on ISO3 rather than on the numeric code.
+code_group <- countries |>
+  left_join(groups, by = "atlas_iso3") |>
+  mutate(group = coalesce(group, "Others")) |>
+  select(country_code, group)
+```
+
+```{r query}
+query <- baci |> filter(hs_rev == hs, t %in% years)
+if (!is.null(products)) query <- query |> filter(k %in% products)
+
+result <- query |>
+  collect() |>                                         # data enter memory here
+  left_join(code_group, by = c("i" = "country_code")) |> rename(exporter = group) |>
+  left_join(code_group, by = c("j" = "country_code")) |> rename(importer = group) |>
+  group_by(t, exporter, importer) |>
+  summarise(
+    value_usd_bn = sum(v) / 1e6,          # v is thousands of USD -> billions
+    tonnes       = sum(q, na.rm = TRUE),  # only meaningful if `products` is one product
+    .groups = "drop"
+  )
+
+result
+```
+
+```{r save}
+# One output file per question, named after the chart id it will feed.
+dir.create("data/working", showWarnings = FALSE)
+write_csv(result, "data/working/<chart-id>.csv")
+```
+
+**Before using the result, check:**
+- Is the latest year (provisional) flagged?
+- Does any group include an entrepôt (Hong Kong, Singapore, Netherlands, UAE)?
+- Were the product codes chosen in the same HS revision as `hs`?
