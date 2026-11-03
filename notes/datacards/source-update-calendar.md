@@ -17,10 +17,10 @@
 ## What to do when a source updates
 
 ### BACI: annual routine (late January)
-1. Download the new zip(s) for **each HS revision we keep** (HS92 and HS22). Store them unchanged in `data/raw/baci/{YYYY-MM-DD}/`. Never overwrite the previous snapshot.
+1. Run `python loaders/baci_download.py --load`. It finds the new version, downloads HS92 and HS22 into a new `data/raw/baci/{today}/` folder (the previous snapshot is never touched), unzips them and builds the Parquet. If it stops on a new country code, add that code to `reference/countries.csv` and run `python loaders/baci_load.py data/raw/baci/{today}` again.
 2. Re-read the new readme and the release notes on the CEPII page. If anything changed in the variables, units or country list, update the card.
 3. Diff the new `country_codes` and `product_codes` against the reference files (`reference/country-codes.md`, `reference/hs-products.md`) and record any changes.
-4. Re-run the BACI loader for **all years**, not only the new one. Past flows are revised, and CEPII advises against mixing versions.
+4. The loader always rebuilds **all years** of a revision, not only the new one. Past flows are revised, and CEPII advises against mixing versions.
 5. **Move the asterisk.** The year that was provisional (e.g. 2024) is no longer flagged, and the new latest year (e.g. 2025) is.
 6. Update the card header (`describes release …`), this calendar, and `current_vintage` in the registry if BACI has been promoted by then.
 7. Rebuild. Every chart footer and citation picks up the new version automatically, provided it is read from the data and not typed in.

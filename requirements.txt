@@ -1,0 +1,7 @@
+# Python packages for the loaders and templates.
+# Install once, inside the project's virtual environment:
+#   python -m venv .venv
+#   source .venv/bin/activate        (Windows: .venv\Scripts\activate)
+#   pip install -r requirements.txt
+duckdb==2.0.0
+pandas==3.0.5

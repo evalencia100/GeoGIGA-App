@@ -1,0 +1,267 @@
+﻿code,Country Name,Global South
+004,Afghanistan,yes
+008,Albania,no
+012,Algeria,yes
+016,American Samoa,yes
+020,Andorra,no
+024,Angola,yes
+028,Antigua and Barbuda,yes
+031,Azerbaijan,yes
+032,Argentina,yes
+036,Australia,no
+040,Austria,no
+044,Bahamas,yes
+048,Bahrain,yes
+050,Bangladesh,yes
+051,Armenia,yes
+052,Barbados,yes
+056,Belgium,no
+060,Bermuda,no
+064,Bhutan,yes
+068,Bolivia (Plurinational State of),yes
+070,Bosnia Herzegovina,no
+072,Botswana,yes
+074,Bouvet Island,yes
+076,Brazil,yes
+084,Belize,yes
+086,Br. Indian Ocean Terr.,yes
+090,Solomon Isds,yes
+092,Br. Virgin Isds,yes
+096,Brunei Darussalam,yes
+100,Bulgaria,no
+104,Myanmar,yes
+108,Burundi,yes
+112,Belarus,no
+116,Cambodia,yes
+120,Cameroon,yes
+124,Canada,no
+132,Cabo Verde,yes
+136,Cayman Isds,yes
+140,Central African Rep.,yes
+144,Sri Lanka,yes
+148,Chad,yes
+152,Chile,yes
+156,China,yes
+158,"China, Taiwan Province of",yes
+162,Christmas Isds,no
+166,Cocos Isds,no
+170,Colombia,yes
+174,Comoros,yes
+175,Mayotte (Overseas France),yes
+178,Congo,yes
+180,Dem. Rep. of the Congo,yes
+184,Cook Isds,yes
+188,Costa Rica,yes
+191,Croatia,no
+192,Cuba,yes
+196,Cyprus,no
+200,Czechoslovakia,no
+203,Czechia,no
+204,Benin,yes
+208,Denmark,no
+212,Dominica,yes
+214,Dominican Rep.,yes
+218,Ecuador,yes
+222,El Salvador,yes
+226,Equatorial Guinea,yes
+230,Ethiopia (...1991),yes
+231,Ethiopia,yes
+232,Eritrea,yes
+233,Estonia,no
+234,Faroe Islands,no
+238,Falkland Isds (Malvinas),yes
+239,South Georgia and the South Sandwich Islands,yes
+242,Fiji,yes
+246,Finland,no
+248,Åland Islands,no
+251,France,no
+254,French Guiana,yes
+258,French Polynesia,yes
+260,Fr. South Antarctic Terr.,yes
+262,Djibouti,yes
+266,Gabon,yes
+268,Georgia,yes
+270,Gambia,yes
+275,State of Palestine,yes
+276,Germany,no
+278,Democratic Republic of Germany,no
+280,Federal Republic of Germany,no
+288,Ghana,yes
+292,Gibraltar,no
+296,Kiribati,yes
+300,Greece,no
+304,Greenland,no
+308,Grenada,yes
+312,Guadeloupe,yes
+316,Guam,yes
+320,Guatemala,yes
+324,Guinea,yes
+328,Guyana,yes
+332,Haiti,yes
+334,Heard Island and McDonald Islands,no
+336,Holy See,no
+340,Honduras,yes
+344,"China, Hong Kong SAR",yes
+348,Hungary,no
+352,Iceland,no
+360,Indonesia,yes
+364,Iran,yes
+368,Iraq,yes
+372,Ireland,no
+376,Israel,no
+380,Italy,no
+384,CÃ´te d'Ivoire,yes
+388,Jamaica,yes
+392,Japan,no
+398,Kazakhstan,yes
+400,Jordan,yes
+404,Kenya,yes
+408,Dem. People's Rep. of Korea,yes
+410,Rep. of Korea,no
+412,Kosovo,no
+414,Kuwait,yes
+417,Kyrgyzstan,yes
+418,Lao People's Dem. Rep.,yes
+422,Lebanon,yes
+426,Lesotho,yes
+428,Latvia,no
+430,Liberia,yes
+434,Libya,yes
+438,Liechtenstein,no
+440,Lithuania,no
+442,Luxembourg,no
+446,"China, Macao SAR",yes
+450,Madagascar,yes
+454,Malawi,yes
+458,Malaysia,yes
+462,Maldives,yes
+466,Mali,yes
+470,Malta,no
+474,Martinique,yes
+478,Mauritania,yes
+480,Mauritius,yes
+484,Mexico,yes
+490,Chinese Taipei,no
+492,Monaco,no
+496,Mongolia,yes
+498,Rep. of Moldova,no
+499,Montenegro,no
+500,Montserrat,yes
+504,Morocco,yes
+508,Mozambique,yes
+512,Oman,yes
+516,Namibia,yes
+520,Nauru,yes
+524,Nepal,yes
+528,Netherlands,no
+530,Netherlands Antilles (...2010),yes
+531,CuraÃ§ao,yes
+533,Aruba,yes
+534,Saint Maarten,yes
+535,Bonaire,yes
+540,New Caledonia,yes
+548,Vanuatu,yes
+554,New Zealand,no
+558,Nicaragua,yes
+562,Niger,yes
+566,Nigeria,yes
+570,Niue,yes
+574,Norfolk Isds,no
+579,Norway,no
+580,N. Mariana Isds,yes
+581,United States Minor Outlying Islands,no
+582,"Pacific Islands, Trust Territory",yes
+583,FS Micronesia,yes
+584,Marshall Isds,yes
+585,Palau,yes
+586,Pakistan,yes
+590,"Panama, excluding Canal Zone",yes
+591,Panama,yes
+592,"Panama, Canal Zone",yes
+598,Papua New Guinea,yes
+600,Paraguay,yes
+604,Peru,yes
+608,Philippines,yes
+612,Pitcairn,yes
+616,Poland,no
+620,Portugal,no
+624,Guinea-Bissau,yes
+626,Timor-Leste,yes
+630,Puerto Rico,yes
+634,Qatar,yes
+638,Réunion,yes
+642,Romania,no
+643,Russian Federation,no
+646,Rwanda,yes
+652,Saint BarthÃ©lemy,yes
+654,Saint Helena,yes
+659,Saint Kitts and Nevis,yes
+660,Anguilla,yes
+662,Saint Lucia,yes
+663,Saint Martin (French part),yes
+666,Saint Pierre and Miquelon,no
+670,Saint Vincent and the Grenadines,yes
+674,San Marino,no
+678,Sao Tome and Principe,yes
+682,Saudi Arabia,yes
+686,Senegal,yes
+688,Serbia,no
+690,Seychelles,yes
+694,Sierra Leone,yes
+699,India,yes
+702,Singapore,yes
+703,Slovakia,no
+704,Viet Nam,yes
+705,Slovenia,no
+706,Somalia,yes
+710,South Africa,yes
+716,Zimbabwe,yes
+720,"Yemen, Democratic",yes
+724,Spain,no
+728,South Sudan,yes
+729,Sudan,yes
+732,Western Sahara,yes
+736,Sudan (...2011),yes
+740,Suriname,yes
+744,Svalbard and Jan Mayen Islands,no
+748,Eswatini,yes
+752,Sweden,no
+757,Switzerland,no
+760,Syria,yes
+762,Tajikistan,yes
+764,Thailand,yes
+768,Togo,yes
+772,Tokelau,yes
+776,Tonga,yes
+780,Trinidad and Tobago,yes
+784,United Arab Emirates,yes
+788,Tunisia,yes
+792,TÃ¼rkiye,yes
+795,Turkmenistan,yes
+796,Turks and Caicos Isds,yes
+798,Tuvalu,yes
+800,Uganda,yes
+804,Ukraine,no
+807,North Macedonia,no
+810,Union of Soviet Socialist Republics,no
+818,Egypt,yes
+826,United Kingdom,no
+831,Guernsey,no
+832,Jersey,no
+833,Isle of Man,no
+834,United Rep. of Tanzania,yes
+842,USA,no
+849,US Misc. Pacific Isds,no
+850,United States Virgin Islands,yes
+854,Burkina Faso,yes
+858,Uruguay,yes
+860,Uzbekistan,yes
+862,Venezuela,yes
+876,Wallis and Futuna Isds,yes
+882,Samoa,yes
+886,"Yemen, Arab Republic",yes
+887,Yemen,yes
+890,"Yugoslavia, Soc. Fed. Rep. of",no
+891,Serbia and Montenegro (...2005),no
+894,Zambia,yes
+960,Indonesia (...2002),yes
