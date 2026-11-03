@@ -1,0 +1,84 @@
+# Meta-card: how the data sources relate
+
+> This file maps the atlas's sources: where they come from, the keys they share, which questions each one answers, and where they overlap or disagree.
+> Each source has its own card. This card holds only what sits *between* cards.
+> Draft v0.1 · 2026-11-03
+
+## 1. Lineage: who feeds whom
+
+```
+National customs authorities
+        │  (declarations, CIF imports / FOB exports)
+        ▼
+UN Comtrade (UNSD) ── raw reported flows, monthly + annual, two figures per flow
+        │
+        │  CEPII reconciliation: CIF→FOB, weighting by reporter reliability
+        ▼
+BACI (CEPII) ── one FOB figure per flow, annual, mirror-filled for non-reporters
+        │
+        ├── + Kiel product classification (groups HS codes into topics)
+        └── + atlas regions.yaml / North–South list (groups countries)
+```
+
+**What this means in practice:** BACI and Comtrade are **not independent evidence**. If both show the same thing, that is one source agreeing with itself after processing, not a confirmation. Where they *disagree*, the difference comes from CEPII's processing (valuation, reliability weights, mirror filling), and that difference can itself be a finding.
+
+Development finance (topic 02) has a separate lineage. OECD CRS is donor-reported. AidData GCDF is compiled by researchers from many sources, for lenders that do not report to the OECD. They overlap in subject but not in method. Those cards will hold the detail.
+
+## 2. Shared keys and reference tables
+
+| Key | Reference file | Used by | Notes |
+|---|---|---|---|
+| Comtrade country code (numeric) | `reference/country-codes.md` | BACI, Comtrade | Not ISO numeric for France 251, Norway 579, India 699, Switzerland 757, USA 842; Taiwan = 490 |
+| ISO3 | `reference/country-codes.md` → atlas country table | Everything else (CRS, AidData, V-Dem, World Bank, geometries) | The bridge between trade data and all other data. Not unique inside BACI (BEL, DEU, SDN). |
+| HS 6-digit | `reference/hs-products.md` | BACI, Comtrade, Kiel | Codes are tied to a revision, and the same code can differ between revisions |
+| HS national 8–10 digit | — | Comtrade only (tariff-line data) | BACI does not go below 6 digits |
+| Region / grouping | `regions/regions.yaml`, North–South list (pending) | All topic pages | Defined once, used by every source |
+
+**Rule:** a country grouping is defined **once**, by ISO3, in the atlas's own files. Scripts never type lists of country names or call `countrycode()` to get trade codes. That is how France and the USA silently drop out of groupings (see BACI card §3.2).
+
+## 3. Division of labour: trade
+
+| Question | Use | Why |
+|---|---|---|
+| Long-run structure: who depends on whom, concentration, North/South, 1995 onwards | **BACI** | Complete, consistent, one figure per flow, covers non-reporters |
+| Recent months, "what happened since sanctions / export controls" | **UN Comtrade** | Monthly, published sooner |
+| What a particular government *declared* | **UN Comtrade** | Raw declarations, not reconciled |
+| Detail finer than HS6, mode of transport, re-exports separately | **UN Comtrade** | BACI doesn't have these |
+| Which countries report at all, and when | **UN Comtrade** (availability endpoint) | Coverage depends on who files what |
+| Unit values (price per tonne) over time | **BACI** | Reconciliation makes unit values cleaner |
+
+**Working rule (Eduardo, 2026-11-03):** BACI for large trends, Comtrade for detailed and recent questions.
+
+## 4. How data is accessed, and the browser question
+
+| Source | Access | Key needed | Where the call happens |
+|---|---|---|---|
+| BACI | Bulk zip, manual | No | R loader at build time |
+| UN Comtrade | API | Yes (free key: 500 calls/day, 100k records/call) | **To decide.** See below. |
+| V-Dem, OECD, World Bank | API / download | Mostly no | Currently called inside Eduardo's observablehq.com notebooks |
+
+**The Comtrade-in-the-browser question.** Eduardo would like to call the Comtrade API from the notebook, as he already does for V-Dem, OECD and the World Bank. Two things are different about Comtrade:
+1. **It needs a key.** Code that runs in a reader's browser is visible to the reader, so the key would be published, which breaks CLAUDE.md rule 7. V-Dem, OECD and the World Bank need no key, so for them this problem does not arise.
+2. **The daily limit is shared.** Every visitor's page view would spend calls from the same 500/day.
+
+CLAUDE.md rule 4 ("nothing fetched at page-view time") was written for these reasons.
+
+**Observable's own answer, "Secrets", only half helps.** On observablehq.com you can store the key as a workspace secret and read it with `Secret("COMTRADE_KEY")`. This only works in **private** notebooks: as soon as a notebook is shared or published, any cell using `Secret` errors. Notebook Kit has no `Secret()`; the equivalent there is an environment variable read by a data loader at build time.
+
+Whether Comtrade's API accepts calls made from a browser (CORS) is **not yet verified**. Test it once in a private notebook before relying on it.
+
+**Recommendation:** write the Comtrade call **in JavaScript, as a Notebook Kit data loader**. It looks almost like the notebook code Eduardo is used to, but it runs once at build time, with the key read from an environment variable, and the result is saved as a file. Readers get a fast page, and the key and the quota stay private. Interactive exploration in an observablehq.com notebook, with Eduardo's own key, stays fine for *his own* research, as long as that notebook is never published.
+
+## 5. Known overlaps and contradictions to write about
+- **BACI compared with Comtrade:** the size of the reconciliation adjustment, by country. Large gaps show where national reporting is weak.
+- **OECD CRS compared with AidData:** to be filled in when those cards exist.
+
+## 6. Card index
+
+| Card | Source | Kind | Status |
+|---|---|---|---|
+| `baci-cepii.md` | BACI, CEPII | aggregate | draft v0.2 |
+| `un-comtrade.md` | UN Comtrade | primary (compiled official declarations) | to write |
+| `oecd-crs.md` | OECD CRS | primary | to write |
+| `aiddata-gcdf.md` | AidData GCDF | primary | to write |
+| `kiel-classification.md` | Kiel product classification | classification (not data) | to write |

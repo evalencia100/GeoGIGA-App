@@ -1,0 +1,14 @@
+# Raw downloads: kept on disk, never committed (CLAUDE.md, architecture rule 3)
+data/raw/
+
+# Parquet written by the loaders: several GB for BACI, rebuilt from data/raw/
+data/baci/
+data/baci_meta/
+data/working/
+
+# R and system clutter
+.Rhistory
+.RData
+.Rproj.user/
+.DS_Store
+node_modules/
