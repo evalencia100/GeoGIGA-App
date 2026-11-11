@@ -42,7 +42,7 @@
 | Dataflow | What it holds |
 |---|---|
 | `DSD_FDI@DF_FDI_POS_CTRY` | **Positions by counterpart area** — used for the first extract |
-| `DSD_FDI@DF_FDI_FLOW_CTRY` | Flows by counterpart area |
+| `DSD_FDI@DF_FDI_FLOW_CTRY` | **Flows by counterpart area** — co-primary with positions, and usually the richer table of the two (`eurostat-fdi.md` §7) |
 | `DSD_FDI@DF_FDI_INC_CTRY` | Income by counterpart area |
 | `DSD_FDI@DF_FDI_POS_IND` · `DF_FDI_FLOW_IND` · `DF_FDI_INC_IND` | The same three, by economic activity instead of partner |
 | `DSD_FDI@DF_FDI_CTRY_IND_SUMM` | Partner **and** activity together, simplified: fewer breakdowns than the dedicated tables |
@@ -186,6 +186,11 @@ browser, then filtered to the 22 EU states that are OECD members. **41,263 rows.
 that extract: year range, which measures and principles are populated, and whether any reporter carries
 the ultimate-investing-country view for Tunisia.
 
+**Next, and not optional:** the same extract from `DF_FDI_FLOW_CTRY`. Flows are co-primary with
+positions rather than a secondary cut, and for FDI they tend to be the richer series — they carry the
+instrument composition and they are what responds to an event. The request is identical but for the
+dataflow id, since the counterpart filter is the only server-side filter used.
+
 ### Why the earlier attempts returned nothing — the retro
 
 Four attempts returned an empty array before one worked. The causes were all different and the symptom
@@ -233,6 +238,9 @@ for this dataflow, despite the specification, and the client-side rule above bec
   Validate on parsed rows, never on the status code alone.
 - 2026-11-11: **34 MB arrives and parses fine in a browser.** Breadth in the query is not the problem it
   looks like; cleverness in the query was.
+- 2026-11-11: **Flows are co-primary with positions.** The first extract here was positions because that
+  was the standing default at the time; the default was revised the same day. Nothing about the access
+  pattern changes — only the dataflow id.
 - 2026-11-11: **Four empty arrays, four different causes.** Full retro in §7. The habits that cost the
   time — hidden diagnostics, changing several things at once, premature server-side filtering — are
   worth more than the dataflow ids.

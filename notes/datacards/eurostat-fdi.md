@@ -1,6 +1,6 @@
 # Data card: Eurostat FDI and the balance-of-payments family
 
-> **Status:** **v0.2, draft** 2026-11-11. Written from Eurostat's own API documentation and dataset pages.
+> **Status:** **v0.3, draft** 2026-11-11. Written from Eurostat's own API documentation and dataset pages.
 > **No data has been fetched yet, and not for want of trying:** the dissemination API was **down** all day
 > on 2026-11-11 (§6.2), so every behavioural claim in §6.1 is still documentation rather than
 > observation. The work was completed from **OECD FDI** instead — see `oecd-fdi.md`.
@@ -31,11 +31,14 @@ The spine is three annual tables under the sixth edition of the IMF's Balance of
   partner economy at the end of the year. This is the right table for questions about presence,
   dependency and accumulated exposure. It is also the only one of the three that distinguishes the
   *immediate* from the *ultimate* counterpart, which is the single most important thing in this card
-  (§3). **The atlas default** (§7).
+  (§3). **Co-primary with flows** (§7).
 - **`bop_fdi6_flow` — flows.** Transactions during the year: new investment, divestment, loans between
   affiliates. This is the right table for questions about momentum and about reaction to events — a
   coup, a bailout, an interconnector agreement. Flows are volatile and frequently negative, and a
-  negative flow is a real phenomenon, not a data error (§4).
+  negative flow is a real phenomenon, not a data error (§4). **Co-primary with positions** (§7).
+  *Eduardo's assessment, 2026-11-11: for FDI, flows are at least as important as positions and the
+  flow data tend to be richer.* Treat that as the working rule; it is a practitioner's judgement about
+  these tables, not a claim this card has verified cell by cell.
 - **`bop_fdi6_inc` — income.** What the investment earned: dividends, reinvested earnings, interest on
   intra-group debt, split into credits and debits. This is the table almost nobody uses and the one with
   the most political content, because it measures what flows *back* (§5).
@@ -105,6 +108,13 @@ making an unsupported claim.** This is also where to look for investment that is
 Chinese, Gulf or American in substance — or the reverse: capital that left a country and came back
 wearing an EU passport. **Atlas default: the ultimate view** (§7), which means accepting thinner
 coverage in exchange for a defensible claim about ownership.
+
+**And a consequence worth stating plainly, because two decisions collide here.** The counterpart view is
+a dimension of **positions only** — flows and income have no ultimate-counterpart breakdown. So with
+flows co-primary (§7), a flows-led chart cannot attribute capital to its ultimate owner at all. The
+workable division: positions, ultimate view, for "who really invests"; flows, immediate counterpart by
+necessity, for "what is happening and when". Those are two different claims and should never share an
+axis or a footer.
 
 **2. Special purpose entities (`entity`).** SPEs are holding companies with no real activity, and their
 inclusion inflates both sides of a bilateral position. Eurostat publishes with and without them. The
@@ -277,7 +287,7 @@ Eurostat remains the better source for an EU-wide figure, so this is unfinished 
 
 | Decision | Choice | What it means in practice |
 |---|---|---|
-| Default measure | **Positions (stocks)** | "FDI to country X" means the accumulated stock unless asked otherwise. Flows and income are reached for when the question is about momentum or about returns. |
+| Default measure | **Positions and flows, co-primary** (revised 2026-11-11; positions alone was the earlier answer) | "FDI to country X" means both: the accumulated stock *and* the transaction series, because they answer different questions and the flow tables tend to be the richer ones. Income is reached for when the question is about what comes back. Where only one chart is possible, the question decides: dependency and exposure → positions; momentum, events and instrument composition → flows. |
 | Counterpart view | **Ultimate investing economy** | Charts attribute capital to its ultimate owner, not to the conduit. The cost is thinner coverage and more suppressed cells; the benefit is that "biggest investor" claims survive scrutiny. |
 | SPE treatment | **Both, with the difference labelled** | Every default position chart carries two series, or one series plus a visible phantom-investment gap. The gap is content, not a caveat. |
 | Atlas or working | **Working only, for now** | Shelf entry, lives in `src/working/`, no registry entry, not in the navigation. Ask again when a chart exists and can be looked at. Topic placement deferred — the activity breakdown pulls towards 01, 02 and 06 at once. |
@@ -316,6 +326,10 @@ discrepancy stated in the prose. The run will settle which of these is fantasy.
 - 2026-11-11: **Four classification decisions taken** (§7): positions as default, ultimate counterpart,
   SPE difference shown rather than hidden, working-only for now. The first three are deliberately the
   more demanding options, and they stack — see the tension note in §7.
+- 2026-11-11: **Flows are co-primary with positions, not a secondary cut** (Eduardo's correction to an
+  earlier recommendation of this card). Flow tables tend to carry richer detail, and flows are what show
+  a response to an event. The catch is recorded in §3: the ultimate-counterpart view is a positions-only
+  dimension, so a flows-led chart cannot make an ultimate-ownership claim.
 - 2026-11-11: **When a source is down, substitute rather than wait, and label the substitution.** The
   Tunisia question was answered from OECD FDI the same day. The two sources are not interchangeable
   (§5), so the chart footer, not a footnote, has to say which one it is.
