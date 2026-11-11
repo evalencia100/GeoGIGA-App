@@ -2,7 +2,7 @@
 
 > This file maps the atlas's sources: where they come from, the keys they share, which questions each one answers, and where they overlap or disagree.
 > Each source has its own card. This card holds only what sits *between* cards.
-> Draft v0.2 · 2026-11-10
+> Draft v0.3 · 2026-11-11
 
 ## 1. Lineage: who feeds whom
 
@@ -61,6 +61,8 @@ Development finance (topic 02) has a separate lineage. OECD CRS is donor-reporte
 | BACI | Bulk zip, scripted (`loaders/baci_download.py`) | No | Python loader, once per release |
 | UN Comtrade | API | Yes (free key: 500 calls/day, 100k records/call) | **To decide.** See below. |
 | OECD CRS | SDMX REST API (`sdmx.oecd.org`), plus bulk text files for pre-1995 | **No** | Python loader for anything published; browser `fetch` is fine for Eduardo's own exploration, because no key is involved. Broad queries are refused, so requests must be chunked. |
+| Eurostat FDI | Statistics API (JSON-stat), plus bulk TSV/SDMX files | **No** | Browser `fetch` in principle; **the API was down for a full day on 2026-11-11**, so the loader should prefer the file download. |
+| OECD FDI | SDMX, v2 **named** component filters (`c[COUNTERPART_AREA]=TUN`) | **No** | Verified working from an observablehq.com notebook. Filter on the counterpart only and select reporters client-side. |
 | V-Dem, World Bank | API / download | Mostly no | Currently called inside Eduardo's observablehq.com notebooks |
 
 **The Comtrade-in-the-browser question.** Eduardo would like to call the Comtrade API from the notebook, as he already does for V-Dem, OECD and the World Bank. Two things are different about Comtrade:
@@ -81,6 +83,12 @@ Whether Comtrade's API accepts calls made from a browser (CORS) is **not yet ver
 - **BACI compared with Comtrade:** the size of the reconciliation adjustment, by country. Large gaps show where national reporting is weak.
 - **OECD CRS compared with AidData:** to be filled in when the AidData card exists. The question to answer first: what AidData counts that the CRS cannot (non-DAC lenders, above all China), and whether the two can be shown on one chart without implying they were measured the same way.
 - **OECD CRS compared with IATI:** same code lists for flow type, finance type, aid type and recipient, and a direct activity link through the CRS identifier — so IATI can add timing and some sub-national detail to a CRS activity. Worth a card of its own if topic 02 needs it.
+- **Eurostat FDI compared with OECD FDI:** not independent evidence — both rest largely on the same
+  national balance-of-payments returns. They differ in benchmark (BPM6 presentation versus BMD4),
+  activity classification (NACE versus ISIC) and, decisively, in who reports: OECD membership is not
+  EU membership, so Bulgaria, Croatia, Cyprus, Malta and Romania are missing from the OECD tables.
+  One source per chart, named in the footer. Where they disagree, the explanation is compilation
+  practice, and OECD's metadata dataflow is where it is written down.
 - **Bilateral reporting compared with total effort:** a provider's CRS series excludes its share of EU Institutions spending, which is reported by the EU as its own provider. Any "how much does Germany give country X" chart has to say which of the two it is.
 
 ## 6. Card index
@@ -91,4 +99,6 @@ Whether Comtrade's API accepts calls made from a browser (CORS) is **not yet ver
 | `un-comtrade.md` | UN Comtrade | primary (compiled official declarations) | to write |
 | `oecd-crs.md` | OECD CRS | primary | **v0.2 draft** — API recipe verified in use; data-level facts not yet |
 | `aiddata-gcdf.md` | AidData GCDF | primary | to write |
+| `eurostat-fdi.md` | Eurostat FDI (BPM6) | primary | **v0.2 draft** — API was down on first use; no data yet |
+| `oecd-fdi.md` | OECD FDI (BMD4) | primary | **v0.1 draft** — first extract verified 2026-11-11 |
 | `kiel-classification.md` | Kiel product classification | classification (not data) | to write |
